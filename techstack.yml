@@ -1,0 +1,56 @@
+repo_name: vitor-tadashi/lightweight-fix-gateway
+report_id: 9b9b0bedc23a8b488070f9e329326826
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-09T23:20:33+00:00'
+requested_by: vitor-tadashi
+provider: github
+branch: master
+detected_tools_count: 4
+tools:
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/vitor-tadashi/lightweight-fix-gateway
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/vitor-tadashi/lightweight-fix-gateway
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/vitor-tadashi/lightweight-fix-gateway/blob/master/.github/workflows/codeql-analysis.yml
+  detection_source: ".github/workflows/codeql-analysis.yml"
+  last_updated_by: Vitor Tadashi
+  last_updated_on: 2022-10-09 21:23:33.000000000 Z
+- name: Gradle
+  description: A powerful build system for the JVM
+  website_url: https://www.gradle.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Java Build Tools
+  image_url: https://img.stackshare.io/service/975/gradlephant-social-black-bg.png
+  detection_source_url: https://github.com/vitor-tadashi/lightweight-fix-gateway/blob/master/build.gradle
+  detection_source: build.gradle
+  last_updated_by: Vitor Tadashi
+  last_updated_on: 2022-10-09 23:43:19.000000000 Z
