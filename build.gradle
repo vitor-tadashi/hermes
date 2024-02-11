@@ -7,19 +7,17 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'br.com.tadashera.roadrunner.Application'
-
 def projectPom = {
-    name = 'roadrunner'
+    name = 'hermes'
     packaging = 'jar'
-    description = 'Lightweight FIX Gateway'
+    description = 'High-performance and lightweight FIXP client API library.'
 
-    url = 'https://github.com/vitor-tadashi/lightweight-fix-gateway'
+    url = 'https://github.com/vitor-tadashi/hermes'
 
     scm {
-        connection = 'scm:git:https://github.com/vitor-tadashi/lightweight-fix-gateway.git'
-        developerConnection = 'scm:git:https://github.com/vitor-tadashi/lightweight-fix-gateway.git'
-        url = 'https://github.com/vitor-tadashi/lightweight-fix-gateway.git'
+        connection = 'scm:git:https://github.com/vitor-tadashi/hermesgit'
+        developerConnection = 'scm:git:https://github.com/vitor-tadashi/hermesy.git'
+        url = 'https://github.com/vitor-tadashi/hermes.git'
     }
 
     licenses {
@@ -32,7 +30,7 @@ def projectPom = {
     developers {
         developer {
             id = 'vitor-tadashi'
-            name = 'Vitor Tadashi'
+            name = 'Vitor Tadashi Uno Nishimura'
             email = 'vitor.tadashi@gmail.com'
             url = 'https://github.com/vitor-tadashi'
         }
@@ -44,21 +42,18 @@ repositories{
 }
 
 ext {
-    artio = '0.136'
-    agrona = '0.4.12'
-    log4j = '2.19.0'
-    junitJupiter = '5.9.0'
-    mockito = '4.8.0'
+    agrona = '1.20.0'
+    junit = '5.10.2'
+    mockito = '5.10.0'
 }
 
 dependencies{
-    implementation group: 'uk.co.real-logic', name: 'artio-core', version: "${artio}"
-    implementation group: 'uk.co.real-logic', name: 'Agrona', version: "${agrona}"
+    implementation group: 'org.agrona', name: 'agrona', version: "${agrona}"
 
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: "${log4j}"
-    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j}"
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junit}"
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit}"
 
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junitJupiter}"
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockito}"
     testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockito}"
 }
 
@@ -68,3 +63,4 @@ test {
         excludeTags 'IntegrationTest'
     }
 }
+
