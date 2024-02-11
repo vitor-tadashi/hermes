@@ -1,2 +1,2 @@
 # Hermes client
-High-performance FIXP client api library that will help you to communicate with B3 binary order entry gateway
+Unlock seamless integration with B3's binary order entry gateway using our high-performance FIXP client API library. Engineered for speed and precision, our solution facilitates rapid communication, ensuring efficient connectivity tailored to B3's trading environment
