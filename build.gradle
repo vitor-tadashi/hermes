@@ -57,10 +57,12 @@ dependencies{
     testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockito}"
 }
 
-test {
-    useJUnitPlatform {
-        includeTags 'UnitTest'
-        excludeTags 'IntegrationTest'
+tasks.named('test', Test) {
+    useJUnitPlatform()
+
+    maxHeapSize = '4G'
+
+    testLogging {
+        events "passed"
     }
 }
-
