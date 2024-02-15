@@ -1,7 +1,7 @@
 <!--
 &lt;--- Readme.md Snippet without images Start ---&gt;
 ## Tech Stack
-vitor-tadashi/lightweight-fix-gateway is built on the following main stack:
+vitor-tadashi/hermes is built on the following main stack:
 
 - [Java](https://www.java.com) – Languages
 - [GitHub Actions](https://github.com/features/actions) – Continuous Integration
@@ -13,7 +13,7 @@ Full tech stack [here](/techstack.md)
 
 &lt;--- Readme.md Snippet with images Start ---&gt;
 ## Tech Stack
-vitor-tadashi/lightweight-fix-gateway is built on the following main stack:
+vitor-tadashi/hermes is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/995/K85ZWV2F.png' alt='Java'/> [Java](https://www.java.com) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
@@ -26,7 +26,7 @@ Full tech stack [here](/techstack.md)
 <div align="center">
 
 # Tech Stack File
-![](https://img.stackshare.io/repo.svg "repo") [vitor-tadashi/lightweight-fix-gateway](https://github.com/vitor-tadashi/lightweight-fix-gateway)![](https://img.stackshare.io/public_badge.svg "public")
+![](https://img.stackshare.io/repo.svg "repo") [vitor-tadashi/hermes](https://github.com/vitor-tadashi/hermes)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
 |4<br/>Tools used|02/09/24 <br/>Report generated|
 |------|------|
