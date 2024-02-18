@@ -1,20 +1,3 @@
-# Contributing to Hermes
-
-If you would like to contribute code you can do so through GitHub by opening a pull request or creating an issue with an attached patch.
-
-When submitting code, please make every effort to follow existing conventions and style in order to keep the code as readable as possible.
-
-## License
-
-By contributing your code, you agree to license your contribution under the terms of the APLv2:
-
-https://github.com/vitor-tadashi/hermes/blob/master/LICENSE
-
-All files are made available under the Apache 2.0 license.
-
-If you are adding a new file it should have the following header:
-
-```
 /*
  * Copyright 2024-2024 - Open FIXP - Hermes.
  *
@@ -30,4 +13,17 @@ If you are adding a new file it should have the following header:
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- ```
+package com.openfixp.hermes;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class MainTest {
+
+    @Test
+    void should_test_main() {
+        Main.main(new String[] {});
+        assertTrue(true, "Test passed!");
+    }
+}

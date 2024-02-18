@@ -7,6 +7,29 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
+def checkstyleVersion = '9.3'
+def junitVersion = '5.10.2'
+def mockitoVersion = '5.10.0'
+def agronaVersion = '1.20.0'
+def hermesGroup = 'com.openfixp.hermes'
+
+ext {
+    group = hermesGroup
+    isReleaseVersion = !version.endsWith("SNAPSHOT")
+}
+
+static int getBuildJavaVersion() {
+    def buildJavaVersion = System.getenv('BUILD_JAVA_VERSION') ?: JavaVersion.current().getMajorVersion()
+    if (buildJavaVersion.indexOf('.') > 0) {
+        buildJavaVersion = buildJavaVersion.substring(0, buildJavaVersion.indexOf('.'))
+    }
+    if (buildJavaVersion.indexOf('-') > 0) {
+        buildJavaVersion = buildJavaVersion.substring(0, buildJavaVersion.indexOf('-'))
+    }
+    Integer.parseInt(buildJavaVersion)
+}
+int buildJavaVersion = getBuildJavaVersion()
+
 def projectPom = {
     name = 'hermes'
     packaging = 'jar'
@@ -41,28 +64,93 @@ repositories{
     mavenCentral()
 }
 
-ext {
-    agrona = '1.20.0'
-    junit = '5.10.2'
-    mockito = '5.10.0'
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'checkstyle'
+
+    group = hermesGroup
+    version = version
+
+    def toolchainLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(buildJavaVersion)
+    }
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(buildJavaVersion)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.deprecation = true
+    }
+
+    dependencies {
+        implementation group: 'org.agrona', name: 'agrona', version: "${agronaVersion}"
+
+        testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junitVersion}"
+        testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junitVersion}"
+        testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+
+        testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockitoVersion}"
+        testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+
+    }
+
+    checkstyle.toolVersion = "${checkstyleVersion}"
+
+    tasks.withType(Test).configureEach {
+        useJUnitPlatform()
+
+        if (buildJavaVersion >= 9) {
+            jvmArgs('--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED')
+            jvmArgs('--add-opens', 'java.base/java.util.zip=ALL-UNNAMED')
+        }
+
+        if (buildJavaVersion >= 21) {
+            jvmArgs('-XX:+EnableDynamicAgentLoading')
+        }
+
+        javaLauncher.set(toolchainLauncher)
+    }
+
+    tasks.withType(JavaExec).configureEach {
+        javaLauncher.set(toolchainLauncher)
+    }
+
+    javadoc {
+        title = '<h1>Artio</h1>'
+        options.bottom = '<i>Copyright &#169; 2024 Open FIXP - Hermes. All Rights Reserved.</i>'
+        options.encoding = 'UTF-8'
+        options.docEncoding = 'UTF-8'
+        options.charSet = 'UTF-8'
+        if (JavaVersion.current().isJava10Compatible()) {
+            options.addBooleanOption 'html5', true
+        }
+        options.addStringOption('Xdoclint:all,-missing', '-quiet')
+    }
+
+    jar {
+        manifest.attributes(
+                'Implementation-Title': 'Hermes',
+                'Implementation-Version': archiveVersion,
+                'Implementation-Vendor': 'Open FIXP',
+        )
+    }
+
+    configurations {
+        tests
+    }
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
 }
 
-dependencies{
-    implementation group: 'org.agrona', name: 'agrona', version: "${agrona}"
-
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: "${junit}"
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junit}"
-
-    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockito}"
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: "${mockito}"
-}
-
-tasks.named('test', Test) {
-    useJUnitPlatform()
-
-    maxHeapSize = '4G'
-
-    testLogging {
-        events "passed"
+tasks.withType(PublishToMavenRepository).configureEach {
+    onlyIf {
+        isReleaseVersion
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 - Hermes.
+ * Copyright 2024-2024 - Open FIXP - Hermes.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.hermes;
+package com.openfixp.hermes;
 
-import org.junit.jupiter.api.Test;
+/**
+ * The Main class.
+ */
+public class Main {
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-class GitHubActionsSanityTest {
-
-    @Test
-    void should_only_pass_on_github_actions() {
-        System.out.println("GitHub Actions Sanity Test");
-        assertTrue(true, "This test should only pass on GitHub Actions");
+    /**
+     * Main method.
+     *
+     * @param args the command line arguments
+     */
+    public static void main(final String[] args) {
+        System.out.println("Hello world!");
     }
 }
