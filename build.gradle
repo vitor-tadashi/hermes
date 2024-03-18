@@ -10,7 +10,7 @@ apply plugin: 'application'
 def checkstyleVersion = '9.3'
 def junitVersion = '5.10.2'
 def mockitoVersion = '5.10.0'
-def agronaVersion = '1.20.0'
+def agronaVersion = '1.21.0'
 def hermesGroup = 'com.openfixp.hermes'
 
 ext {
